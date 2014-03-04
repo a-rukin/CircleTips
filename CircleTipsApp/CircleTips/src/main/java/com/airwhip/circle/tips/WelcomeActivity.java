@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class WelcomeActivity extends Activity {
 
     private ProgressBar progressBar;
+    private TextView processText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +21,31 @@ public class WelcomeActivity extends Activity {
         setContentView(R.layout.welcome_activity);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        processText = (TextView) findViewById(R.id.processText);
+
+        //TODO test
         progressBar.setProgress(100);
+        processText.setText("Loading achievements...");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //TODO test
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i <= 100; i++) {
+                    progressBar.setProgress(i);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+
     }
 }
