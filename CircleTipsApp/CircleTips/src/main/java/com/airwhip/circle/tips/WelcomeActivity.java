@@ -2,15 +2,17 @@ package com.airwhip.circle.tips;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+
+import com.airwhip.circle.tips.getters.ApplicationInformation;
 
 public class WelcomeActivity extends Activity {
 
     private ProgressBar progressBar;
-    private TextView processText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +23,9 @@ public class WelcomeActivity extends Activity {
         setContentView(R.layout.welcome_activity);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        processText = (TextView) findViewById(R.id.processText);
 
-        //TODO move to res
-        processText.setText("Loading achievements...");
+        Log.d("TEST_APP", Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
+        Log.d("TEST_APP", ApplicationInformation.get(this).toString());
     }
 
     @Override
