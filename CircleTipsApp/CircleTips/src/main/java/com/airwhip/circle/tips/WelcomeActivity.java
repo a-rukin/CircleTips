@@ -23,8 +23,7 @@ public class WelcomeActivity extends Activity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         processText = (TextView) findViewById(R.id.processText);
 
-        //TODO test
-        progressBar.setProgress(100);
+        //TODO move to res
         processText.setText("Loading achievements...");
     }
 
@@ -32,7 +31,7 @@ public class WelcomeActivity extends Activity {
     protected void onStart() {
         super.onStart();
 
-        //TODO test
+        //TODO progress bar test
         new Thread(new Runnable() {
             @Override
             public void run() {
