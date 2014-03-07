@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 
 import com.airwhip.circle.tips.getters.AccountInformation;
+import com.airwhip.circle.tips.getters.BrowserInformation;
 
 public class WelcomeActivity extends Activity {
 
@@ -26,7 +27,7 @@ public class WelcomeActivity extends Activity {
 
         //TODO test getters
         Log.d("TEST_APP", Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
-        Log.d("TEST_APP", AccountInformation.get(this).toString());
+        Log.d("TEST_APP", BrowserInformation.getBookmarks(this).toString());
     }
 
     @Override
