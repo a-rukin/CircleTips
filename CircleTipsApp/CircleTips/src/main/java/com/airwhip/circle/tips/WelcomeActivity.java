@@ -3,15 +3,21 @@ package com.airwhip.circle.tips;
 import android.app.Activity;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
 import com.airwhip.circle.tips.getters.AccountInformation;
+import com.airwhip.circle.tips.getters.ApplicationInformation;
 import com.airwhip.circle.tips.getters.BrowserInformation;
+import com.airwhip.circle.tips.getters.MusicInformation;
 
 public class WelcomeActivity extends Activity {
+
+    private static final String XML_DOCUMENT = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+    private static final String USER_TAG_BEGIN_1 = "<user id=\"";
+    private static final String USER_TAG_BEGIN_2 = "\">\n";
+    private static final String USER_TAG_END = "</user>";
 
     private ProgressBar progressBar;
 
@@ -24,10 +30,6 @@ public class WelcomeActivity extends Activity {
         setContentView(R.layout.welcome_activity);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-        //TODO test getters
-        Log.d("TEST_APP", Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
-        Log.d("TEST_APP", BrowserInformation.getBookmarks(this).toString());
     }
 
     @Override
@@ -38,14 +40,19 @@ public class WelcomeActivity extends Activity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 0; i <= 100; i++) {
-                    progressBar.setProgress(i);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+                StringBuilder information = new StringBuilder(XML_DOCUMENT);
+                information.append(USER_TAG_BEGIN_1 + Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID) + USER_TAG_BEGIN_2);
+                information.append(ApplicationInformation.get(getApplicationContext()));
+                progressBar.setProgress(20);
+                information.append(AccountInformation.get(getApplicationContext()));
+                progressBar.setProgress(40);
+                information.append(BrowserInformation.getHistory(getApplicationContext()));
+                progressBar.setProgress(60);
+                information.append(BrowserInformation.getBookmarks(getApplicationContext()));
+                progressBar.setProgress(80);
+                information.append(MusicInformation.get(getApplicationContext()));
+                progressBar.setProgress(100);
+                information.append(USER_TAG_END);
             }
         }).start();
 
