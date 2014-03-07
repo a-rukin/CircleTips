@@ -8,8 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
-import com.airwhip.circle.tips.getters.ApplicationInformation;
-import com.airwhip.circle.tips.getters.MusicInformation;
+import com.airwhip.circle.tips.getters.AccountInformation;
 
 public class WelcomeActivity extends Activity {
 
@@ -27,7 +26,7 @@ public class WelcomeActivity extends Activity {
 
         //TODO test getters
         Log.d("TEST_APP", Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
-        Log.d("TEST_APP", MusicInformation.get(this).toString());
+        Log.d("TEST_APP", AccountInformation.get(this).toString());
     }
 
     @Override
