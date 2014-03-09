@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name_logo">Circle Tips</string>
+    <string name="slogan">quest every day</string>
+
     <string name="app_name">CircleTips</string>
     <string name="loading_achievements">Loading achievements...</string>
     <string name="choose_direction">Choose one of direction</string>

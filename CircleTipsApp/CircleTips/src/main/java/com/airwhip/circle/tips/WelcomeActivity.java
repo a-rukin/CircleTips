@@ -7,8 +7,6 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,14 +28,15 @@ public class WelcomeActivity extends Activity {
 
     // 0 - health, 1 - communicate, 2 - play
     private ImageButton[] buttons = new ImageButton[3];
+
     private TextView tip;
+    private TextView appNameLogo;
+    private TextView slogan;
+    private TextView tutorialMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.welcome_activity);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -47,6 +46,9 @@ public class WelcomeActivity extends Activity {
         buttons[2] = (ImageButton) findViewById(R.id.play);
 
         tip = (TextView) findViewById(R.id.tip);
+        appNameLogo = (TextView) findViewById(R.id.app_name_logo);
+        slogan = (TextView) findViewById(R.id.slogan);
+        tutorialMessage = (TextView) findViewById(R.id.tutorial_message);
     }
 
     @Override
@@ -98,6 +100,9 @@ public class WelcomeActivity extends Activity {
             super.onPostExecute(aVoid);
             progressBar.startAnimation(new Fade(1f, 0f));
             tip.startAnimation(new Fade(1f, 0f));
+            appNameLogo.startAnimation(new Fade(1f, 0f));
+            slogan.startAnimation(new Fade(1f, 0f));
+            tutorialMessage.setVisibility(View.VISIBLE);
             for (ImageButton im : buttons) {
                 im.setOnLongClickListener(new ButtonHold());
                 im.setOnTouchListener(new ButtonRelease());
