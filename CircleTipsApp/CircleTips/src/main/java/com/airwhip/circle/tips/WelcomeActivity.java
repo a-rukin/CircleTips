@@ -1,8 +1,10 @@
 package com.airwhip.circle.tips;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
@@ -53,8 +55,19 @@ public class WelcomeActivity extends Activity {
                 information.append(MusicInformation.get(getApplicationContext()));
                 progressBar.setProgress(100);
                 information.append(USER_TAG_END);
+
+                //TODO run service and send information
+                Intent intent = new Intent(WelcomeActivity.this, PreviewActivity.class);
+                startActivity(intent);
+                finish();
             }
         }).start();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.d("TEST_APP", "DESTROY");
+        super.onDestroy();
     }
 }

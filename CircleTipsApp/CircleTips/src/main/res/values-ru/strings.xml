@@ -3,5 +3,10 @@
 
     <string name="app_name">CircleTips</string>
     <string name="loading_achievements">Загрузка достижений...</string>
+    <string name="choose_direction">Выбери одно из направлений</string>
+
+    <string name="health">Здоровье</string>
+    <string name="communicate">Общение</string>
+    <string name="play">Развлечение</string>
 
 </resources>
