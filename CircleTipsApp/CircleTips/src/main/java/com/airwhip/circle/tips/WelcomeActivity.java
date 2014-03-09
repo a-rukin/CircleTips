@@ -98,15 +98,23 @@ public class WelcomeActivity extends Activity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            progressBar.startAnimation(new Fade(1f, 0f));
-            tip.startAnimation(new Fade(1f, 0f));
-            appNameLogo.startAnimation(new Fade(1f, 0f));
-            slogan.startAnimation(new Fade(1f, 0f));
+            progressBar.startAnimation(new Fade(progressBar, 0f));
+            tip.startAnimation(new Fade(tip, 0f));
+            appNameLogo.startAnimation(new Fade(appNameLogo, 0f));
+            slogan.startAnimation(new Fade(slogan, 0f));
             tutorialMessage.setVisibility(View.VISIBLE);
             for (ImageButton im : buttons) {
                 im.setOnLongClickListener(new ButtonHold());
                 im.setOnTouchListener(new ButtonRelease());
+                im.setOnClickListener(new ButtonClick());
             }
+        }
+    }
+
+    private class ButtonClick implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Log.d("TEST_APP", getTip(v));
         }
     }
 
@@ -114,11 +122,11 @@ public class WelcomeActivity extends Activity {
         @Override
         public boolean onLongClick(View v) {
             tip.setText(getTip(v));
-            tip.startAnimation(new Fade(0f, 1f));
+            tip.startAnimation(new Fade(tip, 1f));
 
             for (View i : buttons) {
                 if (i != v) {
-                    i.startAnimation(new Fade(1f, .4f));
+                    i.startAnimation(new Fade(i, .4f));
                 }
             }
             return false;
@@ -130,11 +138,11 @@ public class WelcomeActivity extends Activity {
         public boolean onTouch(View v, MotionEvent event) {
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 tip.setText(getTip(v));
-                tip.startAnimation(new Fade(1f, 0f));
+                tip.startAnimation(new Fade(tip, 0f));
 
                 for (View i : buttons) {
                     if (i != v) {
-                        i.startAnimation(new Fade(.4f, 1f));
+                        i.startAnimation(new Fade(i, 1f));
                     }
                 }
             }
