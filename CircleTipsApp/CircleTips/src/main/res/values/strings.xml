@@ -3,5 +3,7 @@
 
     <string name="app_name">CircleTips</string>
     <string name="loading_achievements">Loading achievements...</string>
+    <string name="title_activity_preview">PreviewActivity</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
