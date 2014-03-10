@@ -3,5 +3,94 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f8f9ed"
     tools:context=".WelcomeActivity"
-    tools:ignore="MergeRootFrame" />
+    tools:ignore="MergeRootFrame">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:maxHeight="4dp"
+        android:minHeight="4dp"
+        android:progressDrawable="@drawable/progressbar" />
+
+    <TextView
+        android:id="@+id/tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="3dp"
+        android:fontFamily="sans-serif-condensed"
+        android:paddingBottom="6dp"
+        android:text="@string/loading_achievements"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#655253" />
+
+    <ImageButton
+        android:id="@+id/play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="70dp"
+        android:layout_marginLeft="65dp"
+        android:background="@null"
+        android:src="@drawable/play" />
+
+    <ImageButton
+        android:id="@+id/communicate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="80dp"
+        android:background="@null"
+        android:src="@drawable/communicate" />
+
+    <ImageButton
+        android:id="@+id/health"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="70dp"
+        android:background="@null"
+        android:src="@drawable/health" />
+
+    <TextView
+        android:id="@+id/app_name_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="30dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/app_name_logo"
+        android:textColor="#655253"
+        android:textSize="55sp" />
+
+    <TextView
+        android:id="@+id/slogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/slogan"
+        android:textColor="#655253"
+        android:textSize="20sp"
+        android:layout_marginTop="90dp"
+        android:layout_marginRight="48dp" />
+
+    <TextView
+        android:id="@+id/tutorial_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="30dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/choose_direction"
+        android:textColor="#655253"
+        android:textSize="25sp"
+        android:visibility="invisible"/>
+
+</FrameLayout>
