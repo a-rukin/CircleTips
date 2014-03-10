@@ -17,8 +17,14 @@ public class Squats {
 
     private long lastTime;
 
+    private boolean isStart;
+
     public int getCount() {
         return count;
+    }
+
+    public boolean isStart() {
+        return isStart;
     }
 
     public void start(SensorEvent event) {
@@ -27,6 +33,7 @@ public class Squats {
             maxZ = firstZ;
             minZ = firstZ;
             lastTime = System.currentTimeMillis();
+            isStart = true;
         } else {
             Log.e("ERROR_APP", "Squats: wrong sensor (" + event.sensor.getType() + ")");
         }
@@ -40,6 +47,7 @@ public class Squats {
                 minZ = Math.min(minZ, event.values[2]);
                 if (curTime - lastTime > 1000L && Math.abs(event.values[2] - firstZ) < 1f && maxZ - minZ > 10f) {
                     count++;
+                    Log.d("TEST_APP", String.valueOf(count));
                     maxZ = firstZ;
                     minZ = firstZ;
                     lastTime = curTime;

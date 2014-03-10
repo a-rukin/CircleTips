@@ -1,6 +1,11 @@
 package com.airwhip.circle.tips;
 
 import android.app.Activity;
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -12,12 +17,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.airwhip.circle.tips.anim.Fade;
+import com.airwhip.circle.tips.direction.health.Squats;
 import com.airwhip.circle.tips.getters.AccountInformation;
 import com.airwhip.circle.tips.getters.ApplicationInformation;
 import com.airwhip.circle.tips.getters.BrowserInformation;
 import com.airwhip.circle.tips.getters.MusicInformation;
 
-public class WelcomeActivity extends Activity {
+public class WelcomeActivity extends Activity implements SensorEventListener {
 
     private static final String XML_DOCUMENT = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
     private static final String USER_TAG_BEGIN_1 = "<user id=\"";
@@ -34,9 +40,14 @@ public class WelcomeActivity extends Activity {
     private TextView slogan;
     private TextView tutorialMessage;
 
+    private SensorManager sensorManager;
+    private SensorEvent lastAccelerometerEvent;
+    private Squats squats = new Squats();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         setContentView(R.layout.welcome_activity);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -55,6 +66,38 @@ public class WelcomeActivity extends Activity {
     protected void onStart() {
         super.onStart();
         new GetInformation().execute();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        switch (event.sensor.getType()) {
+            case Sensor.TYPE_ACCELEROMETER:
+                lastAccelerometerEvent = event;
+                if (squats.isStart()) {
+                    squats.update(event);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 
     private String getTip(View view) {
@@ -114,7 +157,17 @@ public class WelcomeActivity extends Activity {
     private class ButtonClick implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            Log.d("TEST_APP", getTip(v));
+            switch (v.getId()) {
+                case R.id.health:
+                    squats.start(lastAccelerometerEvent);
+                    break;
+                case R.id.communicate:
+                    break;
+                case R.id.play:
+                    break;
+                default:
+                    Log.e("ERROR_APP", "UNDEFINED ID");
+            }
         }
     }
 
