@@ -1,4 +1,4 @@
 CircleTips
 ==========
 
-Circle Tips app for Sphinx project
+Circle Tips app - quest your day
